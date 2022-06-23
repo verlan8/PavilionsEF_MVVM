@@ -6,7 +6,8 @@
       xmlns:local="clr-namespace:PavilionsEF.Views.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="1000"
-      Title="PavilionListPage">
+      Title="PavilionListPage"
+      Name="PavilionListPg">
 
     <Grid Style="{StaticResource GridBackGround}">
         <StackPanel>
@@ -40,9 +41,10 @@
                         Width="100"
                         Content="{Binding contentDeleteButton}"/>
                 <Button Style="{StaticResource ButtonBackGround}" 
-                        Width="120"
+                        Width="150"
                         Margin="10,0,0,0"
-                        Content="{Binding contentAddEditShopCenter}"/>
+                        Command="{Binding PavilionInterfaceCommand}"
+                        Content="{Binding contentPavilionInterfaceButton}"/>
             </StackPanel>
 
         </StackPanel>

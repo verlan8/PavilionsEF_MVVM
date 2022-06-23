@@ -1,5 +1,4 @@
-﻿using PavilionsEF.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,15 +16,13 @@ using System.Windows.Shapes;
 namespace PavilionsEF.Views.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для PavilionListPage.xaml
+    /// Логика взаимодействия для PavilionRentalPage.xaml
     /// </summary>
-    public partial class PavilionListPage : Page
+    public partial class PavilionRentalPage : Page
     {
-        public PavilionListPage()
+        public PavilionRentalPage()
         {
             InitializeComponent();
-            ViewModelManager viewModelManager = ViewModelManager.GetInstance();
-            PavilionListPg.DataContext = viewModelManager.PavilionListViewModel;
         }
     }
 }

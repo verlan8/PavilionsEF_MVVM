@@ -68,6 +68,19 @@ namespace PavilionsEF.ViewModels
         }
         #endregion
 
+        #region статусы
+
+        private ObservableCollection<string> _Statuses = GetStatuses();
+
+        public ObservableCollection<string> Statuses
+        {
+            get { return _Statuses; }
+            set { Set(ref _Statuses, value); }
+        }
+
+
+        #endregion
+
 
         #region commands
 
@@ -104,7 +117,7 @@ namespace PavilionsEF.ViewModels
             return true;
         }
 
-        //переход на страницу СПИСОК ПАВИЛЬОНОВ
+        //переход на страницу ИНТЕРФЕЙС ТЦ
         private void OnAddEditShopCenterCommandExecuted(object parametr)
         {
             ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState =
@@ -114,7 +127,7 @@ namespace PavilionsEF.ViewModels
 
         #endregion
 
-
+        
 
         public ShoppingCentersViewModel()
         {
@@ -123,7 +136,11 @@ namespace PavilionsEF.ViewModels
             AddEditShopCenterCommand = new RelayCommand(OnAddEditShopCenterCommandExecuted, CanAddEditShopCenterCommandExecute);
         }
 
-
+        private static ObservableCollection<string> GetStatuses()
+        {
+            var db = new pavilionsDBEntities();
+            return new ObservableCollection<string> ( db.statuses.Select(s => s.status_name));
+        }
         private void LoadData()
         {
             var db = new pavilionsDBEntities();

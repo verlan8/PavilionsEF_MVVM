@@ -125,6 +125,7 @@
     <Compile Include="ViewModels\BaseClass\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PageSelectViewModel.cs" />
+    <Compile Include="ViewModels\PavilionListViewModel.cs" />
     <Compile Include="ViewModels\ShoppingCentersViewModel.cs" />
     <Compile Include="Views\Pages\AddEditShopCenterPage.xaml.cs">
       <DependentUpon>AddEditShopCenterPage.xaml</DependentUpon>
@@ -140,6 +141,9 @@
     </Compile>
     <Compile Include="Views\Pages\PavilionListPage.xaml.cs">
       <DependentUpon>PavilionListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\PavilionRentalPage.xaml.cs">
+      <DependentUpon>PavilionRentalPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\ShoppingCentersPage.xaml.cs">
       <DependentUpon>ShoppingCentersPage.xaml</DependentUpon>
@@ -184,6 +188,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\PavilionListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\PavilionRentalPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

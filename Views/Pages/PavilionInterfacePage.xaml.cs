@@ -23,6 +23,7 @@ namespace PavilionsEF.Views.Pages
         public PavilionInterfacePage()
         {
             InitializeComponent();
+
         }
     }
 }

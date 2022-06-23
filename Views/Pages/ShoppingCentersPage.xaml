@@ -14,9 +14,13 @@
         <StackPanel>
             <WrapPanel Orientation="Horizontal">
                 <ComboBox Margin="20,20,0,0"
-                          Width="100"/>
+                          Width="150"
+                          ItemsSource="{Binding Statuses}"
+                          SelectedItem="{Binding SelectedStatus}"/>
                 <ComboBox Margin="20,20,0,0"
-                          Width="100"/>
+                          Width="150"
+                          ItemsSource="{Binding Statuses}"
+                          SelectedItem="{Binding SelectedStatus}"/>
             </WrapPanel>
 
             <ScrollViewer Margin="0,20,0,0">
