@@ -67,7 +67,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Commands\NavigateCommand.cs" />
     <Compile Include="Models\employee.cs">
       <DependentUpon>PavilionsDBModel.tt</DependentUpon>
     </Compile>

@@ -19,6 +19,7 @@ namespace PavilionsEF
 {
     /// <summary>
     /// Логика взаимодействия для MainWindow.xaml
+    /// Прокофьев Иван
     /// </summary>
     public partial class MainWindow : Window
     {
