@@ -1,0 +1,54 @@
+﻿<Page x:Class="PavilionsEF.Views.Pages.ShoppingCentersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:vm="clr-namespace:PavilionsEF.ViewModels"
+      xmlns:local="clr-namespace:PavilionsEF.Views.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="1000"
+      Title="ShoppingCentersPage"
+      Name="ShoppingCenterName"
+      KeepAlive="True">
+    <Grid Style="{StaticResource GridBackGround}">
+        <StackPanel>
+            <WrapPanel Orientation="Horizontal">
+                <ComboBox Margin="20,20,0,0"
+                          Width="100"/>
+                <ComboBox Margin="20,20,0,0"
+                          Width="100"/>
+            </WrapPanel>
+
+            <ScrollViewer Margin="0,20,0,0">
+                <ListView ItemsSource="{Binding ShoppingCenters}" SelectedItem="{Binding SelectedShoppingCenter}" MaxHeight="400">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Название" Width="120" DisplayMemberBinding="{Binding shopping_center_name}"/>
+                            <GridViewColumn Header="Статус" Width="100" DisplayMemberBinding="{Binding status_name}"/>
+                            <GridViewColumn Header="Количество павильонов" Width="150" DisplayMemberBinding="{Binding pavilions_quantity}"/>
+                            <GridViewColumn Header="Город" Width="90" DisplayMemberBinding="{Binding city}"/>
+                            <GridViewColumn Header="Стоимости постройки ТЦ" Width="150" DisplayMemberBinding="{Binding cost}"/>
+                            <GridViewColumn Header="Этажность" Width="70" DisplayMemberBinding="{Binding number_of_storeys}"/>
+                            <GridViewColumn Header="Коэффициент добавочной стоимости ТЦ" Width="240" DisplayMemberBinding="{Binding value_added_factor}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+
+
+            <StackPanel Orientation="Horizontal" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Button Style="{StaticResource ButtonBackGround}" 
+                        Width="100"
+                        Content="{Binding contentDeleteButton}"
+                        Command="{Binding DeleteCommand}"/>
+                <Button Style="{StaticResource ButtonBackGround}" 
+                        Width="120"
+                        Margin="10,0,0,0"
+                        Content="{Binding contentAddEditShopCenter}"
+                        Command="{Binding AddEditShopCenterCommand}"/>
+            </StackPanel>
+            
+        </StackPanel>
+        
+    </Grid>
+</Page>

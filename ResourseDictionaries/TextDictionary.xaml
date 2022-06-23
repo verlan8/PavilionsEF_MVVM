@@ -1,0 +1,67 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style TargetType="TextBox" x:Key="GenerelTextBox">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="#ff37474f"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="AdditionalTextBox">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="#ff78909c"/>
+    </Style>
+
+    <Style TargetType="PasswordBox" x:Key="GenerelPasswordBox">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="#ff37474f"/>
+        <Setter Property="Height" Value="25"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="GenerelTextBlock">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="#ff37474f"/>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="AdditionalTextBlock">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="#ff78909c"/>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="FocusTextBlock">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="#FF9C1A"/>
+    </Style>
+    
+    <Style TargetType="TextBox" x:Key="FocusTextBox">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="#FF9C1A"/>
+    </Style>
+    
+    <Style TargetType="Label" x:Key="TitleLabel">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="#ff37474f"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="GenerelLabel">
+        <Setter Property="FontFamily" Value="Arial"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="#ff37474f"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+</ResourceDictionary>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e8fa617096e64b108d1f38953cb62cfe" Name="Diagram1">
+        <EntityTypeShape EntityType="pavilionsDBModel.employee" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="pavilionsDBModel.pavilion" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="pavilionsDBModel.pavilionStatus" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="pavilionsDBModel.rent" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="pavilionsDBModel.rentStatus" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="pavilionsDBModel.role" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="pavilionsDBModel.shopping_center" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="pavilionsDBModel.status" Width="1.5" PointX="0.75" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="pavilionsDBModel.sysdiagram" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="pavilionsDBModel.tenant" Width="1.5" PointX="5.25" PointY="15.125" IsExpanded="true" />
+        <AssociationConnector Association="pavilionsDBModel.fk_id_employee" ManuallyRouted="false" />
+        <AssociationConnector Association="pavilionsDBModel.fk_id_role" ManuallyRouted="false" />
+        <AssociationConnector Association="pavilionsDBModel.FK_pavilions_pavilionStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="pavilionsDBModel.FK_pavilions_shopping_center" ManuallyRouted="false" />
+        <AssociationConnector Association="pavilionsDBModel.FK_rent_pavilions1" ManuallyRouted="false" />
+        <AssociationConnector Association="pavilionsDBModel.fk_id_tenant" ManuallyRouted="false" />
+        <AssociationConnector Association="pavilionsDBModel.FK_rent_rentStatuses" ManuallyRouted="false" />
+        <AssociationConnector Association="pavilionsDBModel.FK_shopping_center_statuses" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
