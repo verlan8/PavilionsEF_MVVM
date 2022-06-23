@@ -19,8 +19,8 @@
                           SelectedItem="{Binding SelectedStatus}"/>
                 <ComboBox Margin="20,20,0,0"
                           Width="150"
-                          ItemsSource="{Binding Statuses}"
-                          SelectedItem="{Binding SelectedStatus}"/>
+                          ItemsSource="{Binding Cities}"
+                          SelectedItem="{Binding SelectedCity}"/>
             </WrapPanel>
 
             <ScrollViewer Margin="0,20,0,0">
@@ -50,6 +50,12 @@
                         Margin="10,0,0,0"
                         Content="{Binding contentAddEditShopCenter}"
                         Command="{Binding AddEditShopCenterCommand}"/>
+                <Button Style="{StaticResource ButtonBackGround}" 
+                        Width="150"
+                        Margin="10,0,0,0"
+                        Content="{Binding PavilionListButton}"
+                        Command="{Binding PavilionListCommand}"/>
+
             </StackPanel>
             
         </StackPanel>

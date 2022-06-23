@@ -28,6 +28,14 @@ namespace PavilionsEF.ViewModels
             get => _contentAddEditShopCenter;
         }
 
+        private string _pavilionListButton = "Список Павильонов";
+
+        public string PavilionListButton
+        {
+            get { return _pavilionListButton; }
+        }
+
+
         #endregion
 
         //использование ObservableCollection вместо List, т.к. имеется встроенные
@@ -53,7 +61,10 @@ namespace PavilionsEF.ViewModels
             get => _selectedShoppingCenterModel;
             set
             {
-                Set(ref _selectedShoppingCenterModel, value);
+                if (_selectedShoppingCenterModel != value)
+                {
+                    Set(ref _selectedShoppingCenterModel, value);
+                }
             }
         }
         
@@ -70,6 +81,7 @@ namespace PavilionsEF.ViewModels
 
         #region статусы
 
+        private string AllStatuses = "Все";
         private ObservableCollection<string> _Statuses = GetStatuses();
 
         public ObservableCollection<string> Statuses
@@ -78,11 +90,73 @@ namespace PavilionsEF.ViewModels
             set { Set(ref _Statuses, value); }
         }
 
+        private string _selectedStatus;
+        public string SelectedStatus
+        {
+            get { return _selectedStatus; }
+            set 
+            {
+                if (_selectedStatus != value)
+                {
+                    SelectedCity = null;
+                    Set(ref _selectedStatus, value);
+                    if (AllStatuses == value)
+                    {
+                        LoadData();
+                    }
+                    else
+                    {
+                        ShowSPWithSelectedStatus(SelectedStatus);
+                    }
+                    
+                } 
+            }
+        }
+
+        #endregion
+
+        #region города
+        private ObservableCollection<string> _cities = GetCities();
+
+        public ObservableCollection<string> Cities
+        {
+            get { return _cities; }
+            set { Set(ref _cities, value); }
+        }
+
+        private string _selectedCity;
+
+        public string SelectedCity
+        {
+            get { return _selectedCity; }
+            set 
+            { 
+                Set (ref _selectedCity, value);
+                ShowSPWIthSelectedCity(SelectedCity);
+            }
+        }
 
         #endregion
 
 
         #region commands
+
+        #region  Переход на СПИСОК ПАВИЛЬОНОВ
+
+        public ICommand PavilionListCommand { get; }
+
+        private bool CanPavilionListCommandExecute(object parametr)
+        {
+            return true;
+        }
+
+        private void OnPavilionListCommandExecuteed(object parametr)
+        {
+            ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState = 
+                PageSelectViewModel.PageSelectViewModelState.PavilionList;
+        }
+
+        #endregion
 
         #region Удалить ТЦ
         public ICommand DeleteCommand { get; }
@@ -109,7 +183,7 @@ namespace PavilionsEF.ViewModels
         }
         #endregion
 
-        #region Переход на Список Павильонов
+        #region Переход на ИНТЕРФЕЙС ТЦ
         public ICommand AddEditShopCenterCommand { get; }
 
         private bool CanAddEditShopCenterCommandExecute(object parametr)
@@ -121,7 +195,7 @@ namespace PavilionsEF.ViewModels
         private void OnAddEditShopCenterCommandExecuted(object parametr)
         {
             ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState =
-            PageSelectViewModel.PageSelectViewModelState.AddEditSP;
+                PageSelectViewModel.PageSelectViewModelState.AddEditSP;
         }
         #endregion
 
@@ -136,10 +210,60 @@ namespace PavilionsEF.ViewModels
             AddEditShopCenterCommand = new RelayCommand(OnAddEditShopCenterCommandExecuted, CanAddEditShopCenterCommandExecute);
         }
 
+        private void ShowSPWIthSelectedCity(string selectedCity)
+        {
+            var db = new pavilionsDBEntities();
+            ShoppingCenters.Clear();
+            ShoppingCenters = new ObservableCollection<ShoppingCenterModel>(
+                db.shopping_center.Where(s => s.city == selectedCity)
+                .Select(s => new ShoppingCenterModel
+                {
+                    id_shopping_center = s.id_shopping_center,
+                    shopping_center_name = s.shopping_center_name,
+                    status_name = s.status.status_name,
+                    status_id = s.status.id_status,
+                    pavilions_quantity = s.pavilions_quantity,
+                    city = s.city,
+                    cost = s.cost,
+                    number_of_storeys = s.number_of_storeys,
+                    value_added_factor = s.value_added_factor,
+                    shopping_center_image = s.shopping_center_image
+                }).OrderBy(s => new { s.city, s.status_name }));
+        }
+
+        private static ObservableCollection<string> GetCities()
+        {
+            var db = new pavilionsDBEntities();
+            return new ObservableCollection<string>(db.shopping_center.Select(s => s.city).Distinct());
+        }
+
+        private void ShowSPWithSelectedStatus(string status)
+        {
+            var db = new pavilionsDBEntities();
+            ShoppingCenters.Clear();
+            ShoppingCenters = new ObservableCollection<ShoppingCenterModel>(
+                db.shopping_center.Where(s => s.status.status_name == status)
+                .Select(s => new ShoppingCenterModel
+                {
+                    id_shopping_center = s.id_shopping_center,
+                    shopping_center_name = s.shopping_center_name,
+                    status_name = s.status.status_name,
+                    status_id = s.status.id_status,
+                    pavilions_quantity = s.pavilions_quantity,
+                    city = s.city,
+                    cost = s.cost,
+                    number_of_storeys = s.number_of_storeys,
+                    value_added_factor = s.value_added_factor,
+                    shopping_center_image = s.shopping_center_image
+                }).OrderBy(s => new { s.city, s.status_name }));
+        }
+
         private static ObservableCollection<string> GetStatuses()
         {
             var db = new pavilionsDBEntities();
-            return new ObservableCollection<string> ( db.statuses.Select(s => s.status_name));
+            ObservableCollection<string> ListOfStatuses = new ObservableCollection<string>(db.statuses.Select(s => s.status_name));
+            ListOfStatuses.Add("Все");
+            return ListOfStatuses;
         }
         private void LoadData()
         {

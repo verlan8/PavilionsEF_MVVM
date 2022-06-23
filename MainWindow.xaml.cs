@@ -52,7 +52,6 @@ namespace PavilionsEF
                     case PageSelectViewModel.PageSelectViewModelState.PavilionList:
                         pageTo = new PavilionListPage();
                         break;
-                        break;
                 }
                 MainFrame.NavigationService.Navigate(pageTo);
             };

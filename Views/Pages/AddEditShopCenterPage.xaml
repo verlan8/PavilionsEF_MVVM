@@ -27,7 +27,7 @@
                         Width="100"
                         Content="{Binding contentDeleteButton}"/>
                 <Button Style="{StaticResource ButtonBackGround}" 
-                        Width="120"
+                        Width="150"
                         Margin="10,0,0,0"
                         Command="{Binding PavilionListCommand}"
                         Content="{Binding contentPavilionList}"/>

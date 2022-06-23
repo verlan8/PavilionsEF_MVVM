@@ -41,6 +41,66 @@ namespace PavilionsEF.ViewModels
             }
         }
 
+        /*
+         #region статусы
+
+                private string AllStatuses = "Все";
+                private ObservableCollection<string> _Statuses = GetStatuses();
+
+                public ObservableCollection<string> Statuses
+                {
+                    get { return _Statuses; }
+                    set { Set(ref _Statuses, value); }
+                }
+
+                private string _selectedStatus;
+                public string SelectedStatus
+                {
+                    get { return _selectedStatus; }
+                    set 
+                    {
+                        if (_selectedStatus != value)
+                        {
+                            SelectedCity = null;
+                            Set(ref _selectedStatus, value);
+                            if (AllStatuses == value)
+                            {
+                                LoadData();
+                            }
+                            else
+                            {
+                                ShowSPWithSelectedStatus(SelectedStatus);
+                            }
+
+                        } 
+                    }
+                }
+
+                #endregion
+
+                #region города
+                private ObservableCollection<string> _cities = GetCities();
+
+                public ObservableCollection<string> Cities
+                {
+                    get { return _cities; }
+                    set { Set(ref _cities, value); }
+                }
+
+                private string _selectedCity;
+
+                public string SelectedCity
+                {
+                    get { return _selectedCity; }
+                    set 
+                    { 
+                        Set (ref _selectedCity, value);
+                        ShowSPWIthSelectedCity(SelectedCity);
+                    }
+                }
+
+                #endregion*/
+
 
         #region выбранный ТЦ
         private PavilionListModel _selectedPavilion;

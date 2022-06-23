@@ -16,6 +16,9 @@
                           Width="100"/>
                 <ComboBox Margin="20,20,0,0"
                           Width="100"/>
+                <ComboBox Margin="20,20,0,0"
+                          Width="100"
+                          />
             </WrapPanel>
 
             <ScrollViewer Margin="10,20,0,0">
@@ -39,6 +42,7 @@
             <StackPanel Orientation="Horizontal" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <Button Style="{StaticResource ButtonBackGround}" 
                         Width="100"
+                        Command="{Binding DeleteCommand}"
                         Content="{Binding contentDeleteButton}"/>
                 <Button Style="{StaticResource ButtonBackGround}" 
                         Width="150"
