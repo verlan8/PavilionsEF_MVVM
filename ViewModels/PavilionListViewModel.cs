@@ -41,68 +41,69 @@ namespace PavilionsEF.ViewModels
             }
         }
 
-        /*
-         #region статусы
 
-                private string AllStatuses = "Все";
-                private ObservableCollection<string> _Statuses = GetStatuses();
+        #region статусы
 
-                public ObservableCollection<string> Statuses
+        private string AllStatuses = "Все";
+        private ObservableCollection<string> _Statuses = GetStatuses();
+
+        public ObservableCollection<string> Statuses
+        {
+            get { return _Statuses; }
+            set { Set(ref _Statuses, value); }
+        }
+
+        private string _selectedStatus;
+        public string SelectedStatus
+        {
+            get { return _selectedStatus; }
+            set
+            {
+                if (_selectedStatus != value)
                 {
-                    get { return _Statuses; }
-                    set { Set(ref _Statuses, value); }
-                }
-
-                private string _selectedStatus;
-                public string SelectedStatus
-                {
-                    get { return _selectedStatus; }
-                    set 
+                    //SelectedFloor = 0;
+                    Set(ref _selectedStatus, value);
+                    if (AllStatuses == value)
                     {
-                        if (_selectedStatus != value)
-                        {
-                            SelectedCity = null;
-                            Set(ref _selectedStatus, value);
-                            if (AllStatuses == value)
-                            {
-                                LoadData();
-                            }
-                            else
-                            {
-                                ShowSPWithSelectedStatus(SelectedStatus);
-                            }
-
-                        } 
+                        LoadData();
                     }
-                }
-
-                #endregion
-
-                #region города
-                private ObservableCollection<string> _cities = GetCities();
-
-                public ObservableCollection<string> Cities
-                {
-                    get { return _cities; }
-                    set { Set(ref _cities, value); }
-                }
-
-                private string _selectedCity;
-
-                public string SelectedCity
-                {
-                    get { return _selectedCity; }
-                    set 
-                    { 
-                        Set (ref _selectedCity, value);
-                        ShowSPWIthSelectedCity(SelectedCity);
+                    else
+                    {
+                        ShowSPWithSelectedStatus(SelectedStatus);
                     }
+
                 }
+            }
+        }
 
-                #endregion*/
+        #endregion
+
+        #region этажи
+
+        private ObservableCollection<int> _floors = GetFloors();
+
+        public ObservableCollection<int> Floors
+        {
+            get { return _floors; }
+            set { Set(ref _floors, value); }
+        }
+
+        private int _selectedFloor;
+
+        public int SelectedFloor
+        {
+            get { return _selectedFloor; }
+            set
+            {
+                Set(ref _selectedFloor, value);
+                ShowSPWIthSelectedFloor(SelectedFloor);
+            }
+        }
+
+        #endregion
 
 
-        #region выбранный ТЦ
+        #region выбранный павильон
         private PavilionListModel _selectedPavilion;
         /// <summary>
         /// Выбранный ТЦ
@@ -177,6 +178,75 @@ namespace PavilionsEF.ViewModels
             LoadData();
             DeleteCommand = new RelayCommand(OnDeleteCommandExecuted, CanDeleteCommandExecute);
             PavilionInterfaceCommand = new RelayCommand(OnPavilionInterfaceCommandExecuted, CanPavilionInterfaceCommandExecute);
+        }
+
+        private void ShowSPWIthSelectedFloor(int selectedFloor)
+        {
+            var db = new pavilionsDBEntities();
+            PavilionList.Clear();
+            PavilionList = new ObservableCollection<PavilionListModel>(
+                db.pavilions.Where(s => s.pavilion_floor == selectedFloor)
+                .Select(s => new PavilionListModel
+                {
+                    id_pavilion = s.id_pavilion,
+                    id_shopping_center = s.id_shopping_center,
+                    shopping_center_name = s.shopping_center.shopping_center_name,
+                    shopping_center_status_name = s.shopping_center.status.status_name,
+                    floor = s.pavilion_floor,
+                    pavilion_status = s.pavilion_status,
+                    pavilion_status_name = s.pavilionStatus.pavilionstatus_name,
+                    pavilion_square = s.pavilion_square,
+                    cost_per_square_meter = s.cost_per_square_meter,
+                    value_added_factor = s.value_added_factor
+                }));
+
+            /*
+             public string id_pavilion { get; set; }
+                    public int id_shopping_center { get; set; }
+                    public string shopping_center_name { get; set; }
+                    public string shopping_center_status_name { get; set; }
+                    public int floor { get; set; }
+                    public int pavilion_status { get; set; }
+                    public string pavilion_status_name { get; set; }
+                    public decimal pavilion_square { get; set; }
+                    public decimal cost_per_square_meter { get; set; }
+                    public decimal value_added_factor { get; set; }*/
+        }
+
+        private static ObservableCollection<int> GetFloors()
+        {
+            var db = new pavilionsDBEntities();
+            ObservableCollection<int> ListOfFloors = new ObservableCollection<int>(db.pavilions.Select(s => s.pavilion_floor).Distinct());
+            return ListOfFloors;
+        }
+
+        private void ShowSPWithSelectedStatus(string status)
+        {
+            var db = new pavilionsDBEntities();
+            PavilionList.Clear();
+            PavilionList = new ObservableCollection<PavilionListModel>(
+                db.pavilions.Where(s => s.pavilionStatus.pavilionstatus_name == status)
+                .Select(s => new PavilionListModel
+                {
+                    id_pavilion = s.id_pavilion,
+                    id_shopping_center = s.id_shopping_center,
+                    shopping_center_name = s.shopping_center.shopping_center_name,
+                    shopping_center_status_name = s.shopping_center.status.status_name,
+                    floor = s.pavilion_floor,
+                    pavilion_status = s.pavilion_status,
+                    pavilion_status_name = s.pavilionStatus.pavilionstatus_name,
+                    pavilion_square = s.pavilion_square,
+                    cost_per_square_meter = s.cost_per_square_meter,
+                    value_added_factor = s.value_added_factor
+                }));
+        }
+
+        private static ObservableCollection<string> GetStatuses()
+        {
+            var db = new pavilionsDBEntities();
+            ObservableCollection<string> ListOfStatuses = new ObservableCollection<string>(db.pavilionStatuses.Select(s => s.pavilionstatus_name));
+            ListOfStatuses.Add("Все");
+            return ListOfStatuses;
         }
 
         private void LoadData()

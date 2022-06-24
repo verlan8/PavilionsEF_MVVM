@@ -13,16 +13,19 @@
         <StackPanel>
             <WrapPanel Orientation="Horizontal">
                 <ComboBox Margin="20,20,0,0"
-                          Width="100"/>
+                          Width="100"
+                          ItemsSource="{Binding Floors}"
+                          SelectedItem="{Binding SelectedFloor}"/>
                 <ComboBox Margin="20,20,0,0"
                           Width="100"/>
                 <ComboBox Margin="20,20,0,0"
                           Width="100"
-                          />
+                          ItemsSource="{Binding Statuses}"
+                          SelectedItem="{Binding SelectedStatus}"/>
             </WrapPanel>
 
             <ScrollViewer Margin="10,20,0,0">
-                <ListView>
+                <ListView ItemsSource="{Binding PavilionList}" MaxHeight="400">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Статус ТЦ" Width="70" DisplayMemberBinding="{Binding shopping_center_status_name}"/>

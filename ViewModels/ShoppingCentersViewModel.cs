@@ -208,6 +208,7 @@ namespace PavilionsEF.ViewModels
             LoadData();
             DeleteCommand = new RelayCommand(OnDeleteCommandExecuted, CanDeleteCommandExecute);
             AddEditShopCenterCommand = new RelayCommand(OnAddEditShopCenterCommandExecuted, CanAddEditShopCenterCommandExecute);
+            PavilionListCommand = new RelayCommand(OnPavilionListCommandExecuteed, CanPavilionListCommandExecute);
         }
 
         private void ShowSPWIthSelectedCity(string selectedCity)
