@@ -94,6 +94,22 @@ namespace PavilionsEF.ViewModels
         }
         #endregion
 
+        private string _selectedPavilionStatus;
+
+        public string SelectedPavilionStatus
+        {
+            get { return _selectedPavilionStatus; }
+            set { Set(ref _selectedPavilionStatus, value); }
+        }
+
+        private string _selectedShoppingCenterName;
+
+        public string SelectedShoppingCenterName
+        {
+            get { return _selectedShoppingCenterName; }
+            set { Set(ref _selectedShoppingCenterName, value); }
+        }
+
         #region статусы
 
         private string AllStatuses = "Все";
@@ -152,6 +168,22 @@ namespace PavilionsEF.ViewModels
             }
         }
 
+        #endregion
+
+
+        #region павильон для изменения
+        private pavilion _editPavilion;
+        /// <summary>
+        /// Выбранный ТЦ
+        /// </summary>
+        public pavilion EditPavilion
+        {
+            get => _editPavilion;
+            set
+            {
+                Set(ref _editPavilion, value);
+            }
+        }
         #endregion
 
 
@@ -219,13 +251,13 @@ namespace PavilionsEF.ViewModels
         private void OnAddCommandExecuted(object parametr)
         {
             //проверка параметров
-            if (string.IsNullOrWhiteSpace(SelectedPavilion.id_pavilion) || SelectedPavilion.pavilion_status_name == null
-                || SelectedPavilion.shopping_center_name == null)
+            if (string.IsNullOrWhiteSpace(EditPavilion.id_pavilion) || SelectedPavilionStatus == null
+                || string.IsNullOrWhiteSpace(SelectedShoppingCenterName))
             {
                 MessageBox.Show("Неправильно введены строковые параметры");
             }
-            else if (SelectedPavilion.cost_per_square_meter < 0 || SelectedPavilion.floor < 0
-                || SelectedPavilion.pavilion_square < 0 || SelectedPavilion.value_added_factor <= 0)
+            else if (EditPavilion.cost_per_square_meter < 0 || EditPavilion.pavilion_floor < 0
+                || EditPavilion.pavilion_square < 0 || EditPavilion.value_added_factor <= 0)
             {
                 MessageBox.Show("Неправильно введены числовые параметры");
             }
@@ -235,15 +267,14 @@ namespace PavilionsEF.ViewModels
                 {
                     //добавление
                     var db = new pavilionsDBEntities();
-                    SelectedPavilion.pavilion_status = db.pavilions
-                        .Where(s => s.pavilionStatus.pavilionstatus_name == SelectedPavilion.pavilion_status_name)
+                    EditPavilion.pavilion_status = db.pavilions
+                        .Where(s => s.pavilionStatus.pavilionstatus_name == SelectedPavilionStatus)
                         .Select(s => s.pavilionStatus.id_status).FirstOrDefault();
-                    SelectedPavilion.id_shopping_center = db.shopping_center.Where(s => s.shopping_center_name == SelectedPavilion.shopping_center_name)
+                    EditPavilion.id_shopping_center = db.shopping_center.Where(s => s.shopping_center_name == SelectedShoppingCenterName)
                         .Select(s => s.id_shopping_center).FirstOrDefault();
-                    SelectedPavilion.shopping_center_status_name = db.shopping_center
-                        .Where(s => s.id_shopping_center == SelectedPavilion.id_shopping_center).Select(s => s.status.status_name).FirstOrDefault();
-                    PavilionList.Add(SelectedPavilion);
+                    db.pavilions.Add(EditPavilion);
                     db.SaveChanges();
+                    LoadData();
                     ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState =
                         PageSelectViewModel.PageSelectViewModelState.PavilionList;
                 }
@@ -301,7 +332,8 @@ namespace PavilionsEF.ViewModels
         private void OnAddPavilionListCommandExecute(object parametr)
         {
             Statuses.Remove(AllStatuses);
-            SelectedPavilion = new PavilionListModel();
+            //SelectedPavilion = new PavilionListModel();
+            EditPavilion = new pavilion();
             ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState =
                 PageSelectViewModel.PageSelectViewModelState.AddPav;
         }

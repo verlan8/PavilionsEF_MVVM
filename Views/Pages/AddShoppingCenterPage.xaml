@@ -56,38 +56,38 @@
             <TextBox Style="{StaticResource GenerelTextBox}"
                      Height="25"
                      Margin="0,5"
-                     Text="{Binding SelectedShoppingCenter.shopping_center_name}"/>
+                     Text="{Binding EditShoppingCenter.shopping_center_name}"/>
 
             <ComboBox Style="{StaticResource GeneralComboBox}"
                       Height="25"
                       Margin="0,6"
                       ItemsSource="{Binding Statuses}"
-                      SelectedItem ="{Binding SelectedShoppingCenter.status_name}"/>
+                      SelectedItem ="{Binding SelectedSPStatus}"/>
 
             <TextBox Style="{StaticResource GenerelTextBox}"
                      Height="25"
                      Margin="0,6"
-                     Text="{Binding SelectedShoppingCenter.pavilions_quantity}"/>
+                     Text="{Binding EditShoppingCenter.pavilions_quantity}"/>
 
             <TextBox Style="{StaticResource GenerelTextBox}"
                      Height="25"
                      Margin="0,6"
-                     Text="{Binding SelectedShoppingCenter.city}"/>
+                     Text="{Binding EditShoppingCenter.city}"/>
 
             <TextBox Style="{StaticResource GenerelTextBox}"
                      Height="25"
                      Margin="0,6"
-                     Text="{Binding SelectedShoppingCenter.cost}"/>
+                     Text="{Binding EditShoppingCenter.cost}"/>
 
             <TextBox Style="{StaticResource GenerelTextBox}"
                      Height="25"
                      Margin="0,6"
-                     Text="{Binding SelectedShoppingCenter.value_added_factor}"/>
+                     Text="{Binding EditShoppingCenter.value_added_factor}"/>
 
             <TextBox Style="{StaticResource GenerelTextBox}"
                      Height="25"
                      Margin="0,6"
-                     Text="{Binding SelectedShoppingCenter.number_of_storeys}"/>
+                     Text="{Binding EditShoppingCenter.number_of_storeys}"/>
 
             <Button Style="{StaticResource ButtonBackGround}"
                     Content="{Binding contentAddShopCenter}"

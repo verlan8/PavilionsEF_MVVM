@@ -72,6 +72,22 @@ namespace PavilionsEF.ViewModels
             }
         }
 
+        private shopping_center _editShoppingCenter;
+        /// <summary>
+        /// Выбранный ТЦ
+        /// </summary>
+        public shopping_center EditShoppingCenter
+        {
+            get => _editShoppingCenter;
+            set
+            {
+                if (_editShoppingCenter != value)
+                {
+                    Set(ref _editShoppingCenter, value);
+                }
+            }
+        }
+
         #region выбранный ТЦ
         private ShoppingCenterModel _selectedShoppingCenterModel;
         /// <summary>
@@ -88,16 +104,6 @@ namespace PavilionsEF.ViewModels
                 }
             }
         }
-
-        private bool _isSelected = false;
-        /// <summary>
-        /// ТЦ выбран
-        /// </summary>
-        public bool IsSelected
-        {
-            get => _isSelected;
-            set => Set(ref _isSelected, value);
-        }
         #endregion
 
         #region статусы
@@ -110,6 +116,15 @@ namespace PavilionsEF.ViewModels
             get { return _Statuses; }
             set { Set(ref _Statuses, value); }
         }
+
+        private string _selectedSPStatus;
+
+        public string SelectedSPStatus
+        {
+            get { return _selectedSPStatus; }
+            set { Set(ref _selectedSPStatus, value); }
+        }
+
 
         private string _selectedStatus;
         public string SelectedStatus
@@ -233,13 +248,13 @@ namespace PavilionsEF.ViewModels
         private void OnAddCommandExecuted(object parametr)
         {
             //проверка параметров
-            if (string.IsNullOrWhiteSpace(SelectedShoppingCenter.status_name) || SelectedShoppingCenter.status_name == null
-                || string.IsNullOrWhiteSpace(SelectedShoppingCenter.city))
+            if (string.IsNullOrWhiteSpace(SelectedSPStatus) || SelectedSPStatus == null
+                || string.IsNullOrWhiteSpace(EditShoppingCenter.city))
             {
                 MessageBox.Show("Неправильно введены строковые параметры");
             }
-            else if (SelectedShoppingCenter.pavilions_quantity < 0 || SelectedShoppingCenter.cost < 0 
-                || SelectedShoppingCenter.number_of_storeys < 0 || SelectedShoppingCenter.value_added_factor <= 0)
+            else if (EditShoppingCenter.pavilions_quantity < 0 || EditShoppingCenter.cost < 0 
+                || EditShoppingCenter.number_of_storeys < 0 || EditShoppingCenter.value_added_factor <= 0)
             {
                 MessageBox.Show("Неправильно введены числовые параметры");
             }
@@ -249,14 +264,15 @@ namespace PavilionsEF.ViewModels
                 {
                     //добавление
                     var db = new pavilionsDBEntities();
-                    SelectedShoppingCenter.status_id = db.shopping_center
-                        .Where(s => s.status.status_name == SelectedShoppingCenter.status_name)
+                    EditShoppingCenter.id_status = db.shopping_center
+                        .Where(s => s.status.status_name == SelectedSPStatus)
                         .Select(s => s.status.id_status).FirstOrDefault();
-                    SelectedShoppingCenter.shopping_center_image = null;
-                    SelectedShoppingCenter.id_shopping_center = db.shopping_center.OrderByDescending(s => s.id_shopping_center)
+                    EditShoppingCenter.shopping_center_image = null;
+                    EditShoppingCenter.id_shopping_center = db.shopping_center.OrderByDescending(s => s.id_shopping_center)
                         .Select(s => s.id_shopping_center).FirstOrDefault()+1;
-                    ShoppingCenters.Add(SelectedShoppingCenter);
+                    db.shopping_center.Add(EditShoppingCenter);
                     db.SaveChanges();
+                    LoadData();
                     ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState = 
                         PageSelectViewModel.PageSelectViewModelState.ShoppingCenter;
                 }
@@ -281,7 +297,8 @@ namespace PavilionsEF.ViewModels
         //переход на страницу ИНТЕРФЕЙС ТЦ
         private void OnAddShopCenterCommandExecuted(object parametr)
         {
-            SelectedShoppingCenter = new ShoppingCenterModel();
+            //SelectedShoppingCenter = new ShoppingCenterModel();
+            EditShoppingCenter = new shopping_center();
             ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState =
                 PageSelectViewModel.PageSelectViewModelState.AddSP;
         }

@@ -56,40 +56,40 @@
             <TextBox Style="{StaticResource GenerelTextBox}"
                      Height="25"
                      Margin="0,5"
-                     Text="{Binding SelectedPavilion.id_pavilion}"/>
+                     Text="{Binding EditPavilion.id_pavilion}"/>
 
             <ComboBox Style="{StaticResource GeneralComboBox}"
                       Height="25"
                       Margin="0,6"
                       ItemsSource="{Binding ShoppingCentersNames}"
-                      SelectedItem ="{Binding SelectedPavilion.shopping_center_name}"/>
+                      SelectedItem ="{Binding SelectedShoppingCenterName}"/>
 
             <ComboBox Style="{StaticResource GeneralComboBox}"
                       Height="25"
                       Margin="0,6"
                       ItemsSource="{Binding Statuses}"
-                      SelectedItem ="{Binding SelectedPavilion.pavilion_status_name}"/>
+                      SelectedItem ="{Binding SelectedPavilionStatus}"/>
 
 
             <TextBox Style="{StaticResource GenerelTextBox}"
                      Height="25"
                      Margin="0,6"
-                     Text="{Binding SelectedPavilion.floor}"/>
+                     Text="{Binding EditPavilion.pavilion_floor}"/>
 
             <TextBox Style="{StaticResource GenerelTextBox}"
                      Height="25"
                      Margin="0,6"
-                     Text="{Binding SelectedPavilion.pavilion_square}"/>
+                     Text="{Binding EditPavilion.pavilion_square}"/>
 
             <TextBox Style="{StaticResource GenerelTextBox}"
                      Height="25"
                      Margin="0,6"
-                     Text="{Binding SelectedPavilion.cost_per_square_meter}"/>
+                     Text="{Binding EditPavilion.cost_per_square_meter}"/>
 
             <TextBox Style="{StaticResource GenerelTextBox}"
                      Height="25"
                      Margin="0,6"
-                     Text="{Binding SelectedPavilion.value_added_factor}"/>
+                     Text="{Binding EditPavilion.value_added_factor}"/>
 
             <Button Style="{StaticResource ButtonBackGround}"
                     Content="{Binding contentAddPavilion}"
