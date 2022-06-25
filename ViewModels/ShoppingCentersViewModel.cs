@@ -22,10 +22,16 @@ namespace PavilionsEF.ViewModels
             get => _contentDeleteButton;
         }
 
-        private string _contentAddEditShopCenter = "Интерфейс ТЦ";
+        private string _contentAddEditShopCenter = "Изменить";
         public string contentAddEditShopCenter
         {
             get => _contentAddEditShopCenter;
+        }
+
+        private string _contentAddShopCenter = "Добавить";
+        public string contentAddShopCenter
+        {
+            get => _contentAddShopCenter;
         }
 
         private string _pavilionListButton = "Список Павильонов";
@@ -33,6 +39,21 @@ namespace PavilionsEF.ViewModels
         public string PavilionListButton
         {
             get { return _pavilionListButton; }
+        }
+
+        private string _selectedSPButton = "Информация";
+
+        public string SelectedSPButton
+        {
+            get { return _selectedSPButton; }
+        }
+
+        private string _backToShoppingCenter = "Назад";
+
+        public string BackToShoppingCenter
+        {
+            get { return _backToShoppingCenter; }
+            set { _backToShoppingCenter = value; }
         }
 
 
@@ -45,9 +66,9 @@ namespace PavilionsEF.ViewModels
         public ObservableCollection<ShoppingCenterModel> ShoppingCenters
         {
             get { return _ShoppingCenters; }
-            set 
-            { 
-                Set(ref _ShoppingCenters, value); 
+            set
+            {
+                Set(ref _ShoppingCenters, value);
             }
         }
 
@@ -67,7 +88,7 @@ namespace PavilionsEF.ViewModels
                 }
             }
         }
-        
+
         private bool _isSelected = false;
         /// <summary>
         /// ТЦ выбран
@@ -94,7 +115,7 @@ namespace PavilionsEF.ViewModels
         public string SelectedStatus
         {
             get { return _selectedStatus; }
-            set 
+            set
             {
                 if (_selectedStatus != value)
                 {
@@ -108,8 +129,8 @@ namespace PavilionsEF.ViewModels
                     {
                         ShowSPWithSelectedStatus(SelectedStatus);
                     }
-                    
-                } 
+
+                }
             }
         }
 
@@ -129,15 +150,14 @@ namespace PavilionsEF.ViewModels
         public string SelectedCity
         {
             get { return _selectedCity; }
-            set 
-            { 
-                Set (ref _selectedCity, value);
+            set
+            {
+                Set(ref _selectedCity, value);
                 ShowSPWIthSelectedCity(SelectedCity);
             }
         }
 
         #endregion
-
 
         #region commands
 
@@ -152,7 +172,7 @@ namespace PavilionsEF.ViewModels
 
         private void OnPavilionListCommandExecuteed(object parametr)
         {
-            ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState = 
+            ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState =
                 PageSelectViewModel.PageSelectViewModelState.PavilionList;
         }
 
@@ -172,18 +192,102 @@ namespace PavilionsEF.ViewModels
                 var db = new pavilionsDBEntities();
                 shopping_center shoppingCenter = (
                     db.shopping_center.Where(s => s.id_shopping_center == SelectedShoppingCenter.id_shopping_center).FirstOrDefault());
-                shoppingCenter.id_status = (db.statuses.Where(s => s.status_name == "Удален").Select(s=>s.id_status).FirstOrDefault());
+                shoppingCenter.id_status = (db.statuses.Where(s => s.status_name == "Удален").Select(s => s.id_status).FirstOrDefault());
                 db.SaveChanges();
                 ShoppingCenters.Remove(SelectedShoppingCenter);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
         }
         #endregion
 
-        #region Переход на ИНТЕРФЕЙС ТЦ
+        #region Изменить ТЦ
+        public ICommand ChangeCommand { get; }
+
+        private bool CanChangeCommandExecute(object parametr)
+        {
+            return true;
+        }
+
+        private void OnChangeCommandExecuted(object parametr)
+        {
+            //изменение
+            //проверка параметров
+            if (string.IsNullOrEmpty(SelectedShoppingCenter.city.Trim()))
+            {
+
+            }
+        }
+        #endregion
+
+        #region Добавить ТЦ
+        public ICommand AddCommand { get; }
+
+        private bool CanAddCommandExecute(object parametr)
+        {
+            return true;
+        }
+
+        private void OnAddCommandExecuted(object parametr)
+        {
+            //проверка параметров
+            if (string.IsNullOrWhiteSpace(SelectedShoppingCenter.status_name) || SelectedShoppingCenter.status_name == null
+                || string.IsNullOrWhiteSpace(SelectedShoppingCenter.city))
+            {
+                MessageBox.Show("Неправильно введены строковые параметры");
+            }
+            else if (SelectedShoppingCenter.pavilions_quantity < 0 || SelectedShoppingCenter.cost < 0 
+                || SelectedShoppingCenter.number_of_storeys < 0 || SelectedShoppingCenter.value_added_factor <= 0)
+            {
+                MessageBox.Show("Неправильно введены числовые параметры");
+            }
+            else
+            {
+                try
+                {
+                    //добавление
+                    var db = new pavilionsDBEntities();
+                    SelectedShoppingCenter.status_id = db.shopping_center
+                        .Where(s => s.status.status_name == SelectedShoppingCenter.status_name)
+                        .Select(s => s.status.id_status).FirstOrDefault();
+                    SelectedShoppingCenter.shopping_center_image = null;
+                    SelectedShoppingCenter.id_shopping_center = db.shopping_center.OrderByDescending(s => s.id_shopping_center)
+                        .Select(s => s.id_shopping_center).FirstOrDefault()+1;
+                    ShoppingCenters.Add(SelectedShoppingCenter);
+                    db.SaveChanges();
+                    ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState = 
+                        PageSelectViewModel.PageSelectViewModelState.ShoppingCenter;
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                
+                
+            }
+        }
+        #endregion
+
+        #region Переход на добавление ТЦ
+        public ICommand AddShopCenterCommand { get; }
+
+        private bool CanAddShopCenterCommandExecute(object parametr)
+        {
+            return true;
+        }
+
+        //переход на страницу ИНТЕРФЕЙС ТЦ
+        private void OnAddShopCenterCommandExecuted(object parametr)
+        {
+            SelectedShoppingCenter = new ShoppingCenterModel();
+            ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState =
+                PageSelectViewModel.PageSelectViewModelState.AddSP;
+        }
+        #endregion
+
+        #region Переход на изменение ТЦ
         public ICommand AddEditShopCenterCommand { get; }
 
         private bool CanAddEditShopCenterCommandExecute(object parametr)
@@ -195,13 +299,47 @@ namespace PavilionsEF.ViewModels
         private void OnAddEditShopCenterCommandExecuted(object parametr)
         {
             ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState =
-                PageSelectViewModel.PageSelectViewModelState.AddEditSP;
+                PageSelectViewModel.PageSelectViewModelState.EditSP;
+        }
+        #endregion
+
+        #region Переход на информацию о выбранном тц
+
+        public ICommand SelectedSPCommand { get; }
+
+        private bool CanSelectedSPCommandExecute(object parametr)
+        {
+            return true;
+        }
+
+        private void OnSelectedSPCommandExecute(object parametr)
+        {
+            if (_selectedShoppingCenterModel != null)
+            {
+                ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState =
+                PageSelectViewModel.PageSelectViewModelState.SelectedSP;
+            }
+
+        }
+        #endregion
+
+        #region Переход на Список ТЦ
+
+        public ICommand SPCommand { get; }
+
+        private bool CanSPCommandExecute(object parametr)
+        {
+            return true;
+        }
+
+        private void OnSPCommandExecute(object parametr)
+        {
+            ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState =
+                PageSelectViewModel.PageSelectViewModelState.ShoppingCenter;
         }
         #endregion
 
         #endregion
-
-        
 
         public ShoppingCentersViewModel()
         {
@@ -209,6 +347,11 @@ namespace PavilionsEF.ViewModels
             DeleteCommand = new RelayCommand(OnDeleteCommandExecuted, CanDeleteCommandExecute);
             AddEditShopCenterCommand = new RelayCommand(OnAddEditShopCenterCommandExecuted, CanAddEditShopCenterCommandExecute);
             PavilionListCommand = new RelayCommand(OnPavilionListCommandExecuteed, CanPavilionListCommandExecute);
+            SPCommand = new RelayCommand(OnSPCommandExecute, CanSPCommandExecute);
+            SelectedSPCommand = new RelayCommand(OnSelectedSPCommandExecute, CanSelectedSPCommandExecute);
+            ChangeCommand = new RelayCommand(OnChangeCommandExecuted, CanChangeCommandExecute);
+            AddCommand = new RelayCommand(OnAddCommandExecuted, CanAddCommandExecute);
+            AddShopCenterCommand = new RelayCommand(OnAddShopCenterCommandExecuted, CanAddShopCenterCommandExecute);
         }
 
         private void ShowSPWIthSelectedCity(string selectedCity)
@@ -266,6 +409,7 @@ namespace PavilionsEF.ViewModels
             ListOfStatuses.Add("Все");
             return ListOfStatuses;
         }
+
         private void LoadData()
         {
             var db = new pavilionsDBEntities();
@@ -275,7 +419,8 @@ namespace PavilionsEF.ViewModels
                     shop => shop.id_status,
                     status => status.id_status,
                     (shop, status) => new { shop, status })
-                .Select(s => new ShoppingCenterModel {
+                .Select(s => new ShoppingCenterModel
+                {
                     id_shopping_center = s.shop.id_shopping_center,
                     shopping_center_name = s.shop.shopping_center_name,
                     status_name = s.status.status_name,

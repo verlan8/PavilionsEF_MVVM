@@ -43,14 +43,29 @@ namespace PavilionsEF
                     case PageSelectViewModel.PageSelectViewModelState.ShoppingCenter:
                         pageTo = new ShoppingCentersPage();
                         break;
-                    case PageSelectViewModel.PageSelectViewModelState.AddEditSP:
-                        pageTo = new AddEditShopCenterPage();
+                    case PageSelectViewModel.PageSelectViewModelState.AddSP:
+                        pageTo = new AddShoppingCenterPage();
                         break;
                     case PageSelectViewModel.PageSelectViewModelState.PavilionInterface:
                         pageTo = new PavilionInterfacePage();
                         break;
                     case PageSelectViewModel.PageSelectViewModelState.PavilionList:
                         pageTo = new PavilionListPage();
+                        break;
+                    case PageSelectViewModel.PageSelectViewModelState.SelectedSP:
+                        pageTo = new SelectedSPPage();
+                        break;
+                    case PageSelectViewModel.PageSelectViewModelState.EditSP:
+                        pageTo = new EditShoppingCenterPage();
+                        break;
+                    case PageSelectViewModel.PageSelectViewModelState.SelectedPav:
+                        pageTo = new SelectedPavilionPage();
+                        break;
+                    case PageSelectViewModel.PageSelectViewModelState.AddPav:
+                        pageTo = new AddPavilionPage();
+                        break;
+                    case PageSelectViewModel.PageSelectViewModelState.EditPav:
+                        pageTo = new EditPavilionPage();
                         break;
                 }
                 MainFrame.NavigationService.Navigate(pageTo);

@@ -51,11 +51,20 @@
                         Content="{Binding contentAddEditShopCenter}"
                         Command="{Binding AddEditShopCenterCommand}"/>
                 <Button Style="{StaticResource ButtonBackGround}" 
+                        Width="120"
+                        Margin="10,0,0,0"
+                        Content="{Binding contentAddShopCenter}"
+                        Command="{Binding AddShopCenterCommand}"/>
+                <Button Style="{StaticResource ButtonBackGround}" 
                         Width="150"
                         Margin="10,0,0,0"
                         Content="{Binding PavilionListButton}"
                         Command="{Binding PavilionListCommand}"/>
-
+                <Button Style="{StaticResource ButtonBackGround}" 
+                        Width="150"
+                        Margin="10,0,0,0"
+                        Content="{Binding SelectedSPButton}"
+                        Command="{Binding SelectedSPCommand}"/>
             </StackPanel>
             
         </StackPanel>

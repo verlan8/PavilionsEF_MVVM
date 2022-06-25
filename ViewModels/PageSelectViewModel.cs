@@ -7,7 +7,7 @@ namespace PavilionsEF.ViewModels
     {
         public enum PageSelectViewModelState
         {
-            Authorization,Admin,PavilionInterface, PavilionList, ShoppingCenter, AddEditSP
+            Authorization, Admin, PavilionInterface, PavilionList, ShoppingCenter, AddSP, EditSP, SelectedSP, AddPav, EditPav, SelectedPav
         };
 
 
@@ -26,14 +26,20 @@ namespace PavilionsEF.ViewModels
 
 
         private PageSelectViewModelState pageSelectViewModelStateField;
-        public PageSelectViewModelState pageSelectViewModelState { get => pageSelectViewModelStateField; set { pageSelectViewModelStateField = value;
-                Listeners.Invoke(value); } }
-        
+        public PageSelectViewModelState pageSelectViewModelState
+        {
+            get => pageSelectViewModelStateField; set
+            {
+                pageSelectViewModelStateField = value;
+                Listeners.Invoke(value);
+            }
+        }
+
 
         public void AfterLoad()
         {
             pageSelectViewModelState = PageSelectViewModel.PageSelectViewModelState.Authorization;
         }
-            
+
     }
 }

@@ -5,7 +5,6 @@
         public MainViewModel MainViewModel { get; } = new MainViewModel();
 
         public ShoppingCentersViewModel ShoppingCentersViewModel {  get; } = new ShoppingCentersViewModel();
-        public AddEditShopCenterViewModel AddEditShopCenterViewModel { get; } = new AddEditShopCenterViewModel();
         public PavilionListViewModel PavilionListViewModel { get; } = new PavilionListViewModel();
 
         public PageSelectViewModel pageSelectViewModel { get; } = new PageSelectViewModel();

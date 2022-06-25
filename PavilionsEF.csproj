@@ -120,21 +120,29 @@
     <Compile Include="Models\tenant.cs">
       <DependentUpon>PavilionsDBModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\AddEditShopCenterViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModel.cs" />
     <Compile Include="ViewModels\BaseClass\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PageSelectViewModel.cs" />
     <Compile Include="ViewModels\PavilionListViewModel.cs" />
     <Compile Include="ViewModels\ShoppingCentersViewModel.cs" />
-    <Compile Include="Views\Pages\AddEditShopCenterPage.xaml.cs">
-      <DependentUpon>AddEditShopCenterPage.xaml</DependentUpon>
+    <Compile Include="Views\Pages\AddPavilionPage.xaml.cs">
+      <DependentUpon>AddPavilionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\AddShoppingCenterPage.xaml.cs">
+      <DependentUpon>AddShoppingCenterPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\AdminPage.xaml.cs">
       <DependentUpon>AdminPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\AuthorizationPage.xaml.cs">
       <DependentUpon>AuthorizationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\EditPavilionPage.xaml.cs">
+      <DependentUpon>EditPavilionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\EditShoppingCenterPage.xaml.cs">
+      <DependentUpon>EditShoppingCenterPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\PavilionInterfacePage.xaml.cs">
       <DependentUpon>PavilionInterfacePage.xaml</DependentUpon>
@@ -144,6 +152,12 @@
     </Compile>
     <Compile Include="Views\Pages\PavilionRentalPage.xaml.cs">
       <DependentUpon>PavilionRentalPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\SelectedPavilionPage.xaml.cs">
+      <DependentUpon>SelectedPavilionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\SelectedSPPage.xaml.cs">
+      <DependentUpon>SelectedSPPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\ShoppingCentersPage.xaml.cs">
       <DependentUpon>ShoppingCentersPage.xaml</DependentUpon>
@@ -171,7 +185,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\AddEditShopCenterPage.xaml">
+    <Page Include="Views\Pages\AddPavilionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\AddShoppingCenterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -180,6 +198,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\AuthorizationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\EditPavilionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\EditShoppingCenterPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -192,6 +218,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\PavilionRentalPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\SelectedPavilionPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\SelectedSPPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

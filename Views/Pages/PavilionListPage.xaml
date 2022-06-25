@@ -25,7 +25,7 @@
             </WrapPanel>
 
             <ScrollViewer Margin="10,20,0,0">
-                <ListView ItemsSource="{Binding PavilionList}" MaxHeight="400">
+                <ListView ItemsSource="{Binding PavilionList}" SelectedItem="{Binding SelectedPavilion}" MaxHeight="400">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Статус ТЦ" Width="70" DisplayMemberBinding="{Binding shopping_center_status_name}"/>
@@ -40,7 +40,7 @@
                     </ListView.View>
                 </ListView>
             </ScrollViewer>
-            
+
 
             <StackPanel Orientation="Horizontal" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right">
                 <Button Style="{StaticResource ButtonBackGround}" 
@@ -52,6 +52,21 @@
                         Margin="10,0,0,0"
                         Command="{Binding PavilionInterfaceCommand}"
                         Content="{Binding contentPavilionInterfaceButton}"/>
+                <Button Style="{StaticResource ButtonBackGround}" 
+                        Width="120"
+                        Margin="10,0,0,0"
+                        Content="{Binding contentEditPavilion}"
+                        Command="{Binding EditPavilionListCommand}"/>
+                <Button Style="{StaticResource ButtonBackGround}" 
+                        Width="120"
+                        Margin="10,0,0,0"
+                        Content="{Binding contentAddPavilion}"
+                        Command="{Binding AddPavilionListCommand}"/>
+                <Button Style="{StaticResource ButtonBackGround}" 
+                        Width="150"
+                        Margin="10,0,0,0"
+                        Content="{Binding SelectedPavilionButton}"
+                        Command="{Binding SelectedPavilionCommand}"/>
             </StackPanel>
 
         </StackPanel>

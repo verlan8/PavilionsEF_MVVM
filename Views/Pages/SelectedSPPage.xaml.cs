@@ -1,5 +1,4 @@
-﻿using PavilionsEF.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,19 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PavilionsEF.ViewModels;
 
 namespace PavilionsEF.Views.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для AddEditShopCenterPage.xaml
+    /// Логика взаимодействия для SelectedSPPage.xaml
     /// </summary>
-    public partial class AddEditShopCenterPage : Page
+    public partial class SelectedSPPage : Page
     {
-        public AddEditShopCenterPage()
+        public SelectedSPPage()
         {
             InitializeComponent();
             ViewModelManager viewModelManager = ViewModelManager.GetInstance();
-            AddEditSP.DataContext = viewModelManager.AddEditShopCenterViewModel;
+            SelectedSP.DataContext = viewModelManager.ShoppingCentersViewModel;
         }
     }
 }
