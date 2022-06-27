@@ -94,6 +94,9 @@ namespace PavilionsEF.ViewModels
         }
         #endregion
 
+        private pavilionsDBEntities db = new pavilionsDBEntities();
+
+
         private string _selectedPavilionStatus;
 
         public string SelectedPavilionStatus
@@ -130,7 +133,8 @@ namespace PavilionsEF.ViewModels
                 if (_selectedStatus != value)
                 {
                     Set(ref _selectedStatus, value);
-                    if (AllStatuses == value)
+                    SelectValidation();
+                    /*if (AllStatuses == value)
                     {
                         LoadData();
                         SelectedFloor = AllFloors;
@@ -138,7 +142,7 @@ namespace PavilionsEF.ViewModels
                     else
                     {
                         SelectValidation();
-                    }
+                    }*/
 
                 }
             }
@@ -168,6 +172,17 @@ namespace PavilionsEF.ViewModels
             }
         }
 
+        #endregion
+
+
+        #region павильон для добавления
+        private pavilion _addPavilion;
+
+        public pavilion AddPavilion
+        {
+            get { return _addPavilion; }
+            set { _addPavilion = value; }
+        }
         #endregion
 
 
@@ -226,7 +241,7 @@ namespace PavilionsEF.ViewModels
         {
             try
             {
-                var db = new pavilionsDBEntities();
+                //var db = new pavilionsDBEntities();
                 pavilion pavilion = (
                     db.pavilions.Where(s => s.id_pavilion == SelectedPavilion.id_pavilion
                         && s.id_shopping_center == SelectedPavilion.id_shopping_center).FirstOrDefault());
@@ -251,6 +266,74 @@ namespace PavilionsEF.ViewModels
         private void OnAddCommandExecuted(object parametr)
         {
             //проверка параметров
+            if (string.IsNullOrWhiteSpace(AddPavilion.id_pavilion) || SelectedPavilionStatus == null
+                || string.IsNullOrWhiteSpace(SelectedShoppingCenterName))
+            {
+                MessageBox.Show("Неправильно введены строковые параметры");
+            }
+            else if (AddPavilion.cost_per_square_meter < 0 || AddPavilion.pavilion_floor < 0
+                || AddPavilion.pavilion_square < 0 || AddPavilion.value_added_factor <= 0)
+            {
+                MessageBox.Show("Неправильно введены числовые параметры");
+            }
+            else
+            {
+                try
+                {
+                    //добавление
+                    //var db = new pavilionsDBEntities();
+                    AddPavilion.pavilion_status = db.pavilions
+                        .Where(s => s.pavilionStatus.pavilionstatus_name == SelectedPavilionStatus)
+                        .Select(s => s.pavilionStatus.id_status).FirstOrDefault();
+                    AddPavilion.id_shopping_center = db.shopping_center.Where(s => s.shopping_center_name == SelectedShoppingCenterName)
+                        .Select(s => s.id_shopping_center).FirstOrDefault();
+                    db.pavilions.Add(AddPavilion);
+                    db.SaveChanges();
+                    LoadData();
+                    UpdateStatuses();
+                    ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState =
+                        PageSelectViewModel.PageSelectViewModelState.PavilionList;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
+
+            }
+        }
+        #endregion
+
+        #region Переход на Добавление Павильон
+
+        public ICommand AddPavilionListCommand { get; }
+
+        private bool CanAddPavilionListCommandExecute(object parametr)
+        {
+            return true;
+        }
+
+        private void OnAddPavilionListCommandExecute(object parametr)
+        {
+            Statuses.Remove(AllStatuses);
+            //SelectedPavilion = new PavilionListModel();
+            AddPavilion = new pavilion();
+            ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState =
+                PageSelectViewModel.PageSelectViewModelState.AddPav;
+        }
+        #endregion
+
+        #region Изменить Павильон
+        public ICommand EditCommand { get; }
+
+        private bool CanEditCommandExecute(object parametr)
+        {
+            return true;
+        }
+
+        private void OnEditCommandExecuted(object parametr)
+        {
+            //проверка параметров
             if (string.IsNullOrWhiteSpace(EditPavilion.id_pavilion) || SelectedPavilionStatus == null
                 || string.IsNullOrWhiteSpace(SelectedShoppingCenterName))
             {
@@ -266,15 +349,15 @@ namespace PavilionsEF.ViewModels
                 try
                 {
                     //добавление
-                    var db = new pavilionsDBEntities();
+                    //var db = new pavilionsDBEntities();
                     EditPavilion.pavilion_status = db.pavilions
                         .Where(s => s.pavilionStatus.pavilionstatus_name == SelectedPavilionStatus)
                         .Select(s => s.pavilionStatus.id_status).FirstOrDefault();
                     EditPavilion.id_shopping_center = db.shopping_center.Where(s => s.shopping_center_name == SelectedShoppingCenterName)
                         .Select(s => s.id_shopping_center).FirstOrDefault();
-                    db.pavilions.Add(EditPavilion);
                     db.SaveChanges();
                     LoadData();
+                    UpdateStatuses();
                     ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState =
                         PageSelectViewModel.PageSelectViewModelState.PavilionList;
                 }
@@ -285,6 +368,30 @@ namespace PavilionsEF.ViewModels
 
 
             }
+        }
+        #endregion
+
+        #region Переход на Изменение Павильонов
+
+        public ICommand EditPavilionListCommand { get; }
+
+        private bool CanEditPavilionListCommandExecute(object parametr)
+        {
+            return true;
+        }
+
+        private void OnEditPavilionListCommandExecute(object parametr)
+        {
+            if (_selectedPavilion != null)
+            {
+                Statuses.Remove(AllStatuses);
+                EditPavilion = db.pavilions.Where(s => s.id_shopping_center == SelectedPavilion.id_shopping_center && s.id_pavilion == SelectedPavilion.id_pavilion).FirstOrDefault();
+                SelectedPavilionStatus = _selectedPavilion.pavilion_status_name;
+                SelectedShoppingCenterName = _selectedPavilion.shopping_center_name;
+                ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState =
+                    PageSelectViewModel.PageSelectViewModelState.EditPav;
+            }
+
         }
         #endregion
 
@@ -320,42 +427,6 @@ namespace PavilionsEF.ViewModels
         }
         #endregion
 
-        #region Переход на Добавление Павильон
-
-        public ICommand AddPavilionListCommand { get; }
-
-        private bool CanAddPavilionListCommandExecute(object parametr)
-        {
-            return true;
-        }
-
-        private void OnAddPavilionListCommandExecute(object parametr)
-        {
-            Statuses.Remove(AllStatuses);
-            //SelectedPavilion = new PavilionListModel();
-            EditPavilion = new pavilion();
-            ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState =
-                PageSelectViewModel.PageSelectViewModelState.AddPav;
-        }
-        #endregion
-
-        #region Переход на Изменение Павильонов
-
-        public ICommand EditPavilionListCommand { get; }
-
-        private bool CanEditPavilionListCommandExecute(object parametr)
-        {
-            return true;
-        }
-
-        private void OnEditPavilionListCommandExecute(object parametr)
-        {
-            Statuses.Remove(AllStatuses);
-            ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState =
-                PageSelectViewModel.PageSelectViewModelState.EditPav;
-        }
-        #endregion
-
         #region Переход на информацию о выбранном павильоне
 
         public ICommand SelectedPavilionCommand { get; }
@@ -381,6 +452,7 @@ namespace PavilionsEF.ViewModels
         public PavilionListViewModel()
         {
             LoadData();
+            //LoadCurrentSCData();
             UpdateStatuses();
             DeleteCommand = new RelayCommand(OnDeleteCommandExecuted, CanDeleteCommandExecute);
             PavilionInterfaceCommand = new RelayCommand(OnPavilionInterfaceCommandExecuted, CanPavilionInterfaceCommandExecute);
@@ -389,6 +461,7 @@ namespace PavilionsEF.ViewModels
             EditPavilionListCommand = new RelayCommand(OnEditPavilionListCommandExecute, CanEditPavilionListCommandExecute);
             SelectedPavilionCommand = new RelayCommand(OnSelectedPavilionCommandExecute, CanSelectedPavilionCommandExecute);
             AddCommand = new RelayCommand(OnAddCommandExecuted, CanAddCommandExecute);
+            EditCommand = new RelayCommand(OnEditCommandExecuted, CanEditCommandExecute);
         }
 
 
@@ -404,11 +477,12 @@ namespace PavilionsEF.ViewModels
         private void UpdateStatuses()
         {
             Statuses = GetStatuses();
+            Floors = GetFloors();
         }
 
         private void ShowSPWIthSelectedFloorAndStatus(string selectedFloor, string status)
         {
-            var db = new pavilionsDBEntities();
+            //var db = new pavilionsDBEntities();
             PavilionList.Clear();
             int floor = Convert.ToInt32(selectedFloor);
             PavilionList = new ObservableCollection<PavilionListModel>(
@@ -430,7 +504,7 @@ namespace PavilionsEF.ViewModels
 
         private void SelectValidation()
         {
-            var db = new pavilionsDBEntities();
+            //var db = new pavilionsDBEntities();
             PavilionList.Clear();
             if ((_selectedStatus == AllStatuses || _selectedStatus == null)
                  && (_selectedFloor == AllFloors || _selectedFloor == null))
@@ -462,7 +536,7 @@ namespace PavilionsEF.ViewModels
 
         private void ShowSPWIthSelectedFloor(string selectedFloor)
         {
-            var db = new pavilionsDBEntities();
+            //var db = new pavilionsDBEntities();
             PavilionList.Clear();
             int floor = Convert.ToInt32(selectedFloor);
             PavilionList = new ObservableCollection<PavilionListModel>(
@@ -492,7 +566,7 @@ namespace PavilionsEF.ViewModels
 
         private void ShowSPWithSelectedStatus(string status)
         {
-            var db = new pavilionsDBEntities();
+            //var db = new pavilionsDBEntities();
             PavilionList.Clear();
             PavilionList = new ObservableCollection<PavilionListModel>(
                 db.pavilions.Where(s => s.pavilionStatus.pavilionstatus_name == status)
@@ -527,6 +601,33 @@ namespace PavilionsEF.ViewModels
                 .Select(s => s.shopping_center_name).Distinct());
             return ListOfShoppingCentersNames;
         }
+
+        /*private void LoadCurrentSCData()
+        {
+            var db = new pavilionsDBEntities();
+            shopping_center shop = new shopping_center();
+            if (sc.SelectedShoppingCenter != null)
+            {
+                shop = db.shopping_center.Where(p => p.id_shopping_center == sc.SelectedShoppingCenter.id_shopping_center).FirstOrDefault();
+                //var db = new pavilionsDBEntities();
+                PavilionList = new ObservableCollection<PavilionListModel>(
+                    db.pavilions.Where(p => p.id_shopping_center == shop.id_shopping_center)
+                    .Select(s => new PavilionListModel
+                    {
+                        id_pavilion = s.id_pavilion,
+                        id_shopping_center = s.id_shopping_center,
+                        shopping_center_name = s.shopping_center.shopping_center_name,
+                        shopping_center_status_name = s.shopping_center.status.status_name,
+                        floor = s.pavilion_floor,
+                        pavilion_status = s.pavilion_status,
+                        pavilion_status_name = s.pavilionStatus.pavilionstatus_name,
+                        pavilion_square = s.pavilion_square,
+                        cost_per_square_meter = s.cost_per_square_meter,
+                        value_added_factor = s.value_added_factor
+                    }));
+            }
+            
+        }*/
 
         private void LoadData()
         {

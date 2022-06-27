@@ -17,8 +17,6 @@
                           ItemsSource="{Binding Floors}"
                           SelectedItem="{Binding SelectedFloor}"/>
                 <ComboBox Margin="20,20,0,0"
-                          Width="100"/>
-                <ComboBox Margin="20,20,0,0"
                           Width="100"
                           ItemsSource="{Binding Statuses}"
                           SelectedItem="{Binding SelectedStatus}"/>

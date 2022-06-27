@@ -6,6 +6,7 @@
 
         public ShoppingCentersViewModel ShoppingCentersViewModel {  get; } = new ShoppingCentersViewModel();
         public PavilionListViewModel PavilionListViewModel { get; } = new PavilionListViewModel();
+        public AdminViewModel AdminViewModel { get; } = new AdminViewModel();
 
         public PageSelectViewModel pageSelectViewModel { get; } = new PageSelectViewModel();
 

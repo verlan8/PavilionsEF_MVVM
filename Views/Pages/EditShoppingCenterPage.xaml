@@ -56,48 +56,42 @@
             <TextBox Style="{StaticResource GenerelTextBox}"
                      Height="25"
                      Margin="0,5"
-                     IsReadOnly="True"
-                     Text="{Binding SelectedShoppingCenter.shopping_center_name}"/>
+                     Text="{Binding ChangeShoppingCenter.shopping_center_name}"/>
 
             <ComboBox Style="{StaticResource GeneralComboBox}"
                       Height="25"
                       Margin="0,6"
-                      IsReadOnly="True"
                       ItemsSource="{Binding Statuses}"
                       SelectedItem ="{Binding SelectedShoppingCenter.status_name}"/>
 
             <TextBox Style="{StaticResource GenerelTextBox}"
                      Height="25"
                      Margin="0,6"
-                     IsReadOnly="True"
-                     Text="{Binding SelectedShoppingCenter.pavilions_quantity}"/>
+                     Text="{Binding ChangeShoppingCenter.pavilions_quantity}"/>
 
             <TextBox Style="{StaticResource GenerelTextBox}"
                      Height="25"
                      Margin="0,6"
-                     Text="{Binding SelectedShoppingCenter.city}"/>
+                     Text="{Binding ChangeShoppingCenter.city}"/>
 
             <TextBox Style="{StaticResource GenerelTextBox}"
                      Height="25"
                      Margin="0,6"
-                     IsReadOnly="True"
-                     Text="{Binding SelectedShoppingCenter.cost}"/>
+                     Text="{Binding ChangeShoppingCenter.cost}"/>
 
             <TextBox Style="{StaticResource GenerelTextBox}"
                      Height="25"
                      Margin="0,6"
-                     IsReadOnly="True"
-                     Text="{Binding SelectedShoppingCenter.value_added_factor}"/>
+                     Text="{Binding ChangeShoppingCenter.value_added_factor}"/>
 
             <TextBox Style="{StaticResource GenerelTextBox}"
                      Height="25"
                      Margin="0,6"
-                     IsReadOnly="True"
-                     Text="{Binding SelectedShoppingCenter.number_of_storeys}"/>
+                     Text="{Binding ChangeShoppingCenter.number_of_storeys}"/>
 
             <Button Style="{StaticResource ButtonBackGround}"
                     Content="{Binding BackToShoppingCenter}"
-                    Command="{Binding SPCommand}"
+                    Command="{Binding ChangeCommand}"
                     Width="150"/>
         </StackPanel>
     </Grid>

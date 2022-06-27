@@ -252,6 +252,10 @@
           <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="TenantsListOfLeases" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id_tenant" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateStatuses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="Хранилище pavilionsDBModelContainer">
           <EntitySet Name="employees" EntityType="Self.employees" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="pavilions" EntityType="Self.pavilions" Schema="dbo" store:Type="Tables" />
@@ -606,6 +610,10 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="TenantsListOfLeases" ReturnType="Collection(pavilionsDBModel.TenantsListOfLeases_Result)">
+            <Parameter Name="id_tenant" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="UpdateStatuses" />
         </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -617,6 +625,15 @@
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="TenantsListOfLeases_Result">
+          <Property Type="String" Name="shopping_center_name" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="city" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="id_pavilion" Nullable="false" MaxLength="4" />
+          <Property Type="DateTime" Name="start_of_lease" Nullable="false" />
+          <Property Type="DateTime" Name="end_of_lease" Nullable="false" />
+          <Property Type="Decimal" Name="стоимость_аренды" Nullable="true" Precision="38" Scale="6" />
+          <Property Type="String" Name="rentstatus_name" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -761,6 +778,20 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="Хранилище pavilionsDBModel.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="Хранилище pavilionsDBModel.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="TenantsListOfLeases" FunctionName="Хранилище pavilionsDBModel.TenantsListOfLeases">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="pavilionsDBModel.TenantsListOfLeases_Result">
+                <ScalarProperty Name="shopping_center_name" ColumnName="shopping_center_name" />
+                <ScalarProperty Name="city" ColumnName="city" />
+                <ScalarProperty Name="id_pavilion" ColumnName="id_pavilion" />
+                <ScalarProperty Name="start_of_lease" ColumnName="start_of_lease" />
+                <ScalarProperty Name="end_of_lease" ColumnName="end_of_lease" />
+                <ScalarProperty Name="стоимость_аренды" ColumnName="стоимость_аренды" />
+                <ScalarProperty Name="rentstatus_name" ColumnName="rentstatus_name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UpdateStatuses" FunctionName="Хранилище pavilionsDBModel.UpdateStatuses" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -7,10 +7,65 @@
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
       Title="AdminPage"
-      Name="adminPage"
+      Name="AdmPage"
       >
 
     <Grid Style="{StaticResource GridBackGround}">
-        <Label Content="123" Width="300" Height="300" FontSize="40"/>
+        <StackPanel>
+            <WrapPanel Orientation="Horizontal">
+                <TextBox Style="{StaticResource GenerelTextBox}"
+                         Height="25"
+                         Width="250"
+                         MaxLength="{Binding MaxSurname}"
+                         Margin="10,6"
+                         Text="{Binding Surname, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </WrapPanel>
+
+            <ScrollViewer Margin="0,20,0,0">
+                <ListView ItemsSource="{Binding EmployeesList}" SelectedItem="{Binding SelectedEmployee}" MaxHeight="400">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Фамилия" Width="120" DisplayMemberBinding="{Binding employee_surname}"/>
+                            <GridViewColumn Header="Имя" Width="100" DisplayMemberBinding="{Binding employee_name}"/>
+                            <GridViewColumn Header="Отчество" Width="120" DisplayMemberBinding="{Binding employee_middlename}"/>
+                            <GridViewColumn Header="Логин" Width="120" DisplayMemberBinding="{Binding employee_login}"/>
+                            <GridViewColumn Header="Пароль" Width="120" DisplayMemberBinding="{Binding employee_password}"/>
+                            <GridViewColumn Header="Роль" Width="150" DisplayMemberBinding="{Binding role_name}"/>
+                            <GridViewColumn Header="Номер телефона" Width="200" DisplayMemberBinding="{Binding telephone}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+
+
+            <StackPanel Orientation="Horizontal" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Button Style="{StaticResource ButtonBackGround}" 
+                        Width="100"
+                        Content="{Binding contentDeleteButton}"
+                        Command="{Binding DeleteCommand}"/>
+                <Button Style="{StaticResource ButtonBackGround}" 
+                        Width="120"
+                        Margin="10,0,0,0"
+                        Content="{Binding contentEditShopCenter}"
+                        Command="{Binding EditEmployeeCommand}"/>
+                <Button Style="{StaticResource ButtonBackGround}" 
+                        Width="120"
+                        Margin="10,0,0,0"
+                        Content="{Binding contentAddShopCenter}"
+                        Command="{Binding AddEmployeeCommand}"/>
+                <Button Style="{StaticResource ButtonBackGround}" 
+                        Width="150"
+                        Margin="10,0,0,0"
+                        Content="{Binding SelectedSPButton}"
+                        Command="{Binding SelectedEmpCommand}"/>
+                <Button Style="{StaticResource ButtonBackGround}" 
+                        Width="150"
+                        Margin="10,0,0,0"
+                        Content="{Binding contentTenantsButton}"
+                        Command="{Binding TenantsCommand}"/>
+            </StackPanel>
+
+        </StackPanel>
+
     </Grid>
 </Page>

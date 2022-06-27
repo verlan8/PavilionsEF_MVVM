@@ -67,6 +67,24 @@ namespace PavilionsEF
                     case PageSelectViewModel.PageSelectViewModelState.EditPav:
                         pageTo = new EditPavilionPage();
                         break;
+                    case PageSelectViewModel.PageSelectViewModelState.SelectedEmp:
+                        pageTo = new SelectedEmployeePage();
+                        break;
+                    case PageSelectViewModel.PageSelectViewModelState.AddEmp:
+                        pageTo = new AddEmployeePage();
+                        break;
+                    case PageSelectViewModel.PageSelectViewModelState.EditEmp:
+                        pageTo = new EditEmployeePage();
+                        break;
+                    case PageSelectViewModel.PageSelectViewModelState.Tenants:
+                        pageTo = new TenantsPage();
+                        break;
+                    case PageSelectViewModel.PageSelectViewModelState.SelectedTen:
+                        pageTo = new SelectedTenantPage();
+                        break;
+                    case PageSelectViewModel.PageSelectViewModelState.RentalList:
+                        pageTo = new RentalListPage();
+                        break;
                 }
                 MainFrame.NavigationService.Navigate(pageTo);
             };

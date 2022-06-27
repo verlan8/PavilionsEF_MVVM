@@ -18,7 +18,7 @@ namespace PavilionsEF.Models
     public partial class pavilionsDBEntities : DbContext
     {
         public pavilionsDBEntities()
-            : base("pavilionsDBEntities")
+            : base("name=pavilionsDBEntities")
         {
         }
     
@@ -161,6 +161,20 @@ namespace PavilionsEF.Models
         public virtual int sp_upgraddiagrams()
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<TenantsListOfLeases_Result> TenantsListOfLeases(Nullable<int> id_tenant)
+        {
+            var id_tenantParameter = id_tenant.HasValue ?
+                new ObjectParameter("id_tenant", id_tenant) :
+                new ObjectParameter("id_tenant", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<TenantsListOfLeases_Result>("TenantsListOfLeases", id_tenantParameter);
+        }
+    
+        public virtual int UpdateStatuses()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("UpdateStatuses");
         }
     }
 }

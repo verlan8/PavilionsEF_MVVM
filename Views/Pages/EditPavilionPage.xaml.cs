@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PavilionsEF.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,8 @@ namespace PavilionsEF.Views.Pages
         public EditPavilionPage()
         {
             InitializeComponent();
+            ViewModelManager viewModelManager = ViewModelManager.GetInstance();
+            EditPav.DataContext = viewModelManager.PavilionListViewModel;
         }
     }
 }

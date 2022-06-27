@@ -68,64 +68,74 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\employee.cs">
-      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\pavilion.cs">
-      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PavilionDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PavilionDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PavilionDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PavilionDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PavilionDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PavilionDBModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\PavilionListModel.cs" />
-    <Compile Include="Models\PavilionsDBModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PavilionsDBModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PavilionsDBModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PavilionsDBModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PavilionsDBModel.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Models\pavilionStatus.cs">
-      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\rent.cs">
-      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\rentStatus.cs">
-      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\role.cs">
-      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ShoppingCenterModel.cs" />
     <Compile Include="Models\shopping_center.cs">
-      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\status.cs">
-      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tenant.cs">
-      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\TenantModel.cs" />
+    <Compile Include="Models\TenantsListOfLeases_Result.cs">
+      <DependentUpon>PavilionDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModel.cs" />
     <Compile Include="ViewModels\BaseClass\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\PageSelectViewModel.cs" />
     <Compile Include="ViewModels\PavilionListViewModel.cs" />
+    <Compile Include="ViewModels\RentalViewModel.cs" />
     <Compile Include="ViewModels\ShoppingCentersViewModel.cs" />
+    <Compile Include="Views\Pages\AddEmployeePage.xaml.cs">
+      <DependentUpon>AddEmployeePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\AddPavilionPage.xaml.cs">
       <DependentUpon>AddPavilionPage.xaml</DependentUpon>
     </Compile>
@@ -137,6 +147,9 @@
     </Compile>
     <Compile Include="Views\Pages\AuthorizationPage.xaml.cs">
       <DependentUpon>AuthorizationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\EditEmployeePage.xaml.cs">
+      <DependentUpon>EditEmployeePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\EditPavilionPage.xaml.cs">
       <DependentUpon>EditPavilionPage.xaml</DependentUpon>
@@ -153,16 +166,28 @@
     <Compile Include="Views\Pages\PavilionRentalPage.xaml.cs">
       <DependentUpon>PavilionRentalPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\RentalListPage.xaml.cs">
+      <DependentUpon>RentalListPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pages\SelectedEmployeePage.xaml.cs">
+      <DependentUpon>SelectedEmployeePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\SelectedPavilionPage.xaml.cs">
       <DependentUpon>SelectedPavilionPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\SelectedSPPage.xaml.cs">
       <DependentUpon>SelectedSPPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pages\SelectedTenantPage.xaml.cs">
+      <DependentUpon>SelectedTenantPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Pages\ShoppingCentersPage.xaml.cs">
       <DependentUpon>ShoppingCentersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\ViewModelManager.cs" />
+    <Compile Include="Views\Pages\TenantsPage.xaml.cs">
+      <DependentUpon>TenantsPage.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -185,6 +210,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\AddEmployeePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\AddPavilionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -198,6 +227,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pages\AuthorizationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\EditEmployeePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -221,6 +254,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\RentalListPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\SelectedEmployeePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\SelectedPavilionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -229,7 +270,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pages\SelectedTenantPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Pages\ShoppingCentersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pages\TenantsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -252,12 +301,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Models\PavilionsDBModel.edmx">
+    <EntityDeploy Include="Models\PavilionDBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PavilionsDBModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>PavilionDBModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\PavilionsDBModel.edmx.diagram">
-      <DependentUpon>PavilionsDBModel.edmx</DependentUpon>
+    <None Include="Models\PavilionDBModel.edmx.diagram">
+      <DependentUpon>PavilionDBModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -273,19 +322,19 @@
     <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\PavilionsDBModel.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>PavilionsDBModel.Context.cs</LastGenOutput>
-      <DependentUpon>PavilionsDBModel.edmx</DependentUpon>
-    </Content>
-    <Content Include="Models\PavilionsDBModel.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PavilionsDBModel.edmx</DependentUpon>
-      <LastGenOutput>PavilionsDBModel.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="Models\PavilionDBModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PavilionDBModel.edmx</DependentUpon>
+      <LastGenOutput>PavilionDBModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\PavilionDBModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PavilionDBModel.edmx</DependentUpon>
+      <LastGenOutput>PavilionDBModel.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

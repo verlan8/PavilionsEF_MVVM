@@ -6,9 +6,98 @@
       xmlns:local="clr-namespace:PavilionsEF.Views.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="EditPavilionPage">
+      Title="EditPavilionPage"
+      Name="EditPav">
 
-    <Grid>
-        
+    <Grid Style="{StaticResource GridBackGround}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Orientation="Vertical">
+            <Label Style="{StaticResource GenerelLabel}"
+                   Margin="0,5"
+                   Content="Номер павильона"
+                   HorizontalAlignment="Center"/>
+            <Label Style="{StaticResource GenerelLabel}"
+                   Margin="0,5"
+                   Content="Название тц"
+                   HorizontalAlignment="Center"/>
+
+            <Label Style="{StaticResource GenerelLabel}"
+                   Content="Статус павильона"
+                   Margin="0,5"
+                   HorizontalAlignment="Center"/>
+
+            <Label Style="{StaticResource GenerelLabel}"
+                   Content="Этаж павильона"
+                   Margin="0,5"
+                   HorizontalAlignment="Center"/>
+
+            <Label Style="{StaticResource GenerelLabel}"
+                   Content="Площадь"
+                   Margin="0,5"
+                   HorizontalAlignment="Center"/>
+
+            <Label Style="{StaticResource GenerelLabel}"
+                   Content="Стоимость за кв метр"
+                   Margin="0,5"
+                   HorizontalAlignment="Center"/>
+
+            <Label Style="{StaticResource GenerelLabel}"
+                   Content="Коэффициент добавочной стоимости"
+                   Margin="0,5"
+                   HorizontalAlignment="Center"/>
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Orientation="Vertical">
+            <TextBox Style="{StaticResource GenerelTextBox}"
+                     Height="25"
+                     Margin="0,5"
+                     IsReadOnly="True"
+                     Text="{Binding EditPavilion.id_pavilion}"/>
+
+            <ComboBox Style="{StaticResource GeneralComboBox}"
+                      Height="25"
+                      Margin="0,6"
+                      IsEnabled="False"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding ShoppingCentersNames}"
+                      SelectedItem ="{Binding SelectedShoppingCenterName}"/>
+
+            <ComboBox Style="{StaticResource GeneralComboBox}"
+                      Height="25"
+                      Margin="0,6"
+                      ItemsSource="{Binding Statuses}"
+                      SelectedItem ="{Binding SelectedPavilionStatus}"/>
+
+
+            <TextBox Style="{StaticResource GenerelTextBox}"
+                     Height="25"
+                     Margin="0,6"
+                     Text="{Binding EditPavilion.pavilion_floor}"/>
+
+            <TextBox Style="{StaticResource GenerelTextBox}"
+                     Height="25"
+                     Margin="0,6"
+                     Text="{Binding EditPavilion.pavilion_square}"/>
+
+            <TextBox Style="{StaticResource GenerelTextBox}"
+                     Height="25"
+                     Margin="0,6"
+                     Text="{Binding EditPavilion.cost_per_square_meter}"/>
+
+            <TextBox Style="{StaticResource GenerelTextBox}"
+                     Height="25"
+                     Margin="0,6"
+                     Text="{Binding EditPavilion.value_added_factor}"/>
+
+            <Button Style="{StaticResource ButtonBackGround}"
+                    Content="{Binding contentAddPavilion}"
+                    Command="{Binding EditCommand}"
+                    Width="150"/>
+        </StackPanel>
     </Grid>
 </Page>

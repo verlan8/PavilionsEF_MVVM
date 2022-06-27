@@ -7,7 +7,11 @@ namespace PavilionsEF.ViewModels
     {
         public enum PageSelectViewModelState
         {
-            Authorization, Admin, PavilionInterface, PavilionList, ShoppingCenter, AddSP, EditSP, SelectedSP, AddPav, EditPav, SelectedPav
+            Authorization, 
+            Admin, EditEmp, AddEmp, SelectedEmp, 
+            PavilionInterface, PavilionList, AddPav, EditPav, SelectedPav,
+            ShoppingCenter, AddSP, EditSP, SelectedSP,
+            Tenants, SelectedTen, RentalList
         };
 
 
@@ -38,7 +42,7 @@ namespace PavilionsEF.ViewModels
 
         public void AfterLoad()
         {
-            pageSelectViewModelState = PageSelectViewModel.PageSelectViewModelState.Authorization;
+            pageSelectViewModelState = PageSelectViewModelState.Authorization;
         }
 
     }
