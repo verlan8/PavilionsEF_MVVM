@@ -54,7 +54,7 @@
                      Text="{Binding SelectedTenant.tenant_address}"/>
 
             <Button Style="{StaticResource ButtonBackGround}"
-                    Content="{Binding BackToShoppingCenter}"
+                    Content="{Binding BackToTenants}"
                     Command="{Binding TenantsCommand}"
                     Width="150"/>
         </StackPanel>

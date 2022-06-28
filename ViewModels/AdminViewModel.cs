@@ -9,6 +9,8 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using PavilionsEF.Commands;
 using System.Windows;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace PavilionsEF.ViewModels
 {
@@ -48,13 +50,20 @@ namespace PavilionsEF.ViewModels
             get { return _contentTenantsButton; }
         }
 
+        private string _contentRentalListButton = "Список аренд";
 
-        private string _backToShoppingCenter = "Назад";
-
-        public string BackToShoppingCenter
+        public string contentRentalListButton
         {
-            get { return _backToShoppingCenter; }
-            set { _backToShoppingCenter = value; }
+            get { return _contentRentalListButton; }
+        }
+
+
+        private string _backToTenants = "Назад";
+
+        public string BackToTenants
+        {
+            get { return _backToTenants; }
+            set { _backToTenants = value; }
         }
         #endregion
 
@@ -93,6 +102,17 @@ namespace PavilionsEF.ViewModels
         {
             get { return _employeesList; }
             set { Set(ref _employeesList, value); }
+        }
+
+        #endregion
+
+        #region Список аренд
+        private ObservableCollection<RentalListModel> _rentalList;
+
+        public ObservableCollection<RentalListModel> RentalList
+        {
+            get { return _rentalList; }
+            set { Set(ref _rentalList, value); }
         }
 
         #endregion
@@ -318,12 +338,11 @@ namespace PavilionsEF.ViewModels
 
         #endregion
 
-
         #region Выбранный арендатор
 
-        private tenant _selectedTenant;
+        private TenantModel _selectedTenant;
 
-        public tenant SelectedTenant
+        public TenantModel SelectedTenant
         {
             get { return _selectedTenant; }
             set { Set(ref _selectedTenant, value); }
@@ -345,6 +364,7 @@ namespace PavilionsEF.ViewModels
         {
             if (_selectedTenant != null)
             {
+                GetRentalListData();
                 ViewModelManager.GetInstance().pageSelectViewModel.pageSelectViewModelState =
                 PageSelectViewModel.PageSelectViewModelState.RentalList;
             }
@@ -438,6 +458,39 @@ namespace PavilionsEF.ViewModels
             }
         }
 
+        ObservableCollection<RentalListModel> rentals = new ObservableCollection<RentalListModel>(); 
+
+        private void GetRentalListData()
+        {
+            //SqlConnection connection = new SqlConnection(@"Data Source=DESKTOP-TJLQPJN\SQLEXPRESS;Initial Catalog = music_lover; Integrated Security = True");
+
+            //вызвать хранимую процедуру через ADO
+            using (SqlConnection conn = new SqlConnection(@"Data Source=DESKTOP-TJLQPJN\SQLEXPRESS;Initial Catalog = pavilionsDb; Integrated Security = True"))
+            {
+                conn.Open();
+                string ProcName = "TenantsListOfLeases";
+                DataTable dtRentalList = new DataTable();
+                SqlCommand sqlCommand = new SqlCommand(ProcName, conn);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@id_tenant", SqlDbType.Int).Value = SelectedTenant.id_tenant;
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+                while (reader.Read())
+                {
+                    RentalListModel rentalListModel = new RentalListModel();
+                    rentalListModel.shopping_center_name = reader[0].ToString();
+                    rentalListModel.city = reader[1].ToString();
+                    rentalListModel.id_pavilion = reader[2].ToString();
+                    rentalListModel.start_of_lease = Convert.ToDateTime(reader[3]);
+                    rentalListModel.end_of_lease = Convert.ToDateTime(reader[4]);
+                    rentalListModel.rental_cost = Convert.ToDecimal(reader[5]);
+                    rentalListModel.rent_status = reader[6].ToString();
+                    rentals.Add(rentalListModel);
+                }
+                reader.Close();
+                RentalList = rentals;
+
+            }
+        }
 
         private void LoadData()
         {

@@ -98,7 +98,7 @@
                      Text="{Binding SelectedEmployee.telephone}"/>
 
             <Button Style="{StaticResource ButtonBackGround}"
-                    Content="{Binding BackToShoppingCenter}"
+                    Content="{Binding BackToTenants}"
                     Command="{Binding AdminInterfaceCommand}"
                     Width="150"/>
         </StackPanel>

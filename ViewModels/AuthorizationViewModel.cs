@@ -44,8 +44,10 @@ namespace PavilionsEF.ViewModels
         }
         #endregion
 
-
+        //менеджер с
         private string _login = "Adam@gmai.com";
+        //админ
+        //private string _login = "Elizor@gmai.com";
         public string login
         {
             get { return _login; }

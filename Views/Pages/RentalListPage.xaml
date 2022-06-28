@@ -9,7 +9,35 @@
       Title="RentalListPage"
       Name="RentalList">
 
-    <Grid>
-        
+    <Grid Style="{StaticResource GridBackGround}">
+        <StackPanel>
+
+            <Label Content="список аренд"/>
+            <ScrollViewer Margin="0,20,0,0">
+                <ListView ItemsSource="{Binding RentalList}" MaxHeight="400">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Название тц" Width="auto" DisplayMemberBinding="{Binding shopping_center_name}"/>
+                            <GridViewColumn Header="Город" Width="auto" DisplayMemberBinding="{Binding city}"/>
+                            <GridViewColumn Header="Номер павильона" Width="auto" DisplayMemberBinding="{Binding id_pavilion}"/>
+                            <GridViewColumn Header="Начало аренды" Width="auto" DisplayMemberBinding="{Binding start_of_lease}"/>
+                            <GridViewColumn Header="Конец аренды" Width="auto" DisplayMemberBinding="{Binding end_of_lease}"/>
+                            <GridViewColumn Header="Стоимость аренды" Width="auto" DisplayMemberBinding="{Binding rental_cost,StringFormat={}{0:00.00}}"/>
+                            <GridViewColumn Header="Статус аренды" Width="auto" DisplayMemberBinding="{Binding rent_status}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </ScrollViewer>
+
+
+            <StackPanel Orientation="Horizontal" Margin="10" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Button Style="{StaticResource ButtonBackGround}"
+                        Content="{Binding BackToTenants}"
+                        Command="{Binding TenantsCommand}"
+                        Width="150"/>
+            </StackPanel>
+
+        </StackPanel>
+
     </Grid>
 </Page>

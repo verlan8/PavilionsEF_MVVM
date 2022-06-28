@@ -26,6 +26,7 @@ namespace PavilionsEF.Views.Pages
             InitializeComponent();
             ViewModelManager viewModelManager = ViewModelManager.GetInstance();
             PavilionListPg.DataContext = viewModelManager.PavilionListViewModel;
+            //PavilionListPg.DataContext = viewModelManager.ShoppingCentersViewModel;
         }
     }
 }

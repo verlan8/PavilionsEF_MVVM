@@ -44,7 +44,9 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization" />
@@ -68,62 +70,63 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Models\employee.cs">
-      <DependentUpon>PavilionDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\pavilion.cs">
-      <DependentUpon>PavilionDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PavilionDBModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PavilionDBModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PavilionDBModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PavilionDBModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\PavilionDBModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PavilionDBModel.edmx</DependentUpon>
+      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PavilionListModel.cs" />
+    <Compile Include="Models\PavilionsDBModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PavilionsDBModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PavilionsDBModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PavilionsDBModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PavilionsDBModel.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\pavilionStatus.cs">
-      <DependentUpon>PavilionDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\rent.cs">
-      <DependentUpon>PavilionDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\RentalListModel.cs" />
     <Compile Include="Models\rentStatus.cs">
-      <DependentUpon>PavilionDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\role.cs">
-      <DependentUpon>PavilionDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ShoppingCenterModel.cs" />
     <Compile Include="Models\shopping_center.cs">
-      <DependentUpon>PavilionDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>PavilionDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sp_helpdiagrams_Result.cs">
-      <DependentUpon>PavilionDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\status.cs">
-      <DependentUpon>PavilionDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>PavilionDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\tenant.cs">
-      <DependentUpon>PavilionDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TenantModel.cs" />
     <Compile Include="Models\TenantsListOfLeases_Result.cs">
-      <DependentUpon>PavilionDBModel.tt</DependentUpon>
+      <DependentUpon>PavilionsDBModel.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\AuthorizationViewModel.cs" />
@@ -156,9 +159,6 @@
     </Compile>
     <Compile Include="Views\Pages\EditShoppingCenterPage.xaml.cs">
       <DependentUpon>EditShoppingCenterPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Pages\PavilionInterfacePage.xaml.cs">
-      <DependentUpon>PavilionInterfacePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pages\PavilionListPage.xaml.cs">
       <DependentUpon>PavilionListPage.xaml</DependentUpon>
@@ -242,10 +242,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Pages\PavilionInterfacePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Pages\PavilionListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -301,12 +297,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Models\PavilionDBModel.edmx">
+    <EntityDeploy Include="Models\PavilionsDBModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PavilionDBModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>PavilionsDBModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\PavilionDBModel.edmx.diagram">
-      <DependentUpon>PavilionDBModel.edmx</DependentUpon>
+    <None Include="Models\PavilionsDBModel.edmx.diagram">
+      <DependentUpon>PavilionsDBModel.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -317,23 +313,20 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Interfaces\" />
-    <Folder Include="Services\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\PavilionDBModel.Context.tt">
+    <Content Include="Models\PavilionsDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PavilionDBModel.edmx</DependentUpon>
-      <LastGenOutput>PavilionDBModel.Context.cs</LastGenOutput>
+      <DependentUpon>PavilionsDBModel.edmx</DependentUpon>
+      <LastGenOutput>PavilionsDBModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Models\PavilionDBModel.tt">
+    <Content Include="Models\PavilionsDBModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PavilionDBModel.edmx</DependentUpon>
-      <LastGenOutput>PavilionDBModel.cs</LastGenOutput>
+      <DependentUpon>PavilionsDBModel.edmx</DependentUpon>
+      <LastGenOutput>PavilionsDBModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

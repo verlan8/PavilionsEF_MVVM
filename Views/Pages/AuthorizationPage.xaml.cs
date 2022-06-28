@@ -17,7 +17,10 @@ namespace PavilionsEF.Views.Pages
         public AuthorizationPage()
         {
             InitializeComponent();
+            //менеджер
             Password.Password = "7SP9CV";
+            //админ
+            //Password.Password = "yntiRS";
         }
     }
 }

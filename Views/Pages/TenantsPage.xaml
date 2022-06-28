@@ -34,8 +34,8 @@
                 <Button Style="{StaticResource ButtonBackGround}" 
                         Width="150"
                         Margin="10,0,0,0"
-                        Content="{Binding contentTenantsButton}"
-                        Command="{Binding TenantsCommand}"/>
+                        Content="{Binding contentRentalListButton}"
+                        Command="{Binding RentalListCommand}"/>
             </StackPanel>
 
         </StackPanel>
